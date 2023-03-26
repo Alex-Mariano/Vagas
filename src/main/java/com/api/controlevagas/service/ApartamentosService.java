@@ -16,4 +16,8 @@ public class ApartamentosService {
     public ApartamentosEntity save(ApartamentosEntity apartarmentosEntity) {
         return apartamentosRepository.save(apartarmentosEntity);
     }
+
+    public Object findAll() {
+        return apartamentosRepository.findAll();
+    }
 }

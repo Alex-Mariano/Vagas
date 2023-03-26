@@ -2,9 +2,6 @@ package com.api.controlevagas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class ControleVagasApplication {
@@ -14,4 +11,3 @@ public class ControleVagasApplication {
 	}
 
 }
-// https://www.youtube.com/watch?v=LXRU-Z36GEU
