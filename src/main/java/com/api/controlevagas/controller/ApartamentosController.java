@@ -5,7 +5,6 @@ import com.api.controlevagas.entity.ApartamentosEntity;
 import com.api.controlevagas.repository.ApartamentosRepository;
 import com.api.controlevagas.service.ApartamentosService;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
