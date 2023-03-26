@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class ApartamentosService {
@@ -20,5 +21,9 @@ public class ApartamentosService {
 
     public Object findAll() {
         return apartamentosRepository.findAll();
+    }
+
+    public Optional<ApartamentosEntity> findById(Integer apartamento){
+        return apartamentosRepository.findById(apartamento);
     }
 }

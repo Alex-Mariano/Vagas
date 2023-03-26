@@ -13,9 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/vagas" ,produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/vagas", produces = MediaType.APPLICATION_JSON_VALUE)
+@ResponseBody
 public class ApartamentosController {
 
     @Autowired
@@ -32,10 +34,19 @@ public class ApartamentosController {
         return ResponseEntity.status(HttpStatus.CREATED).body(apartamentosService.save(apartamentosEntity));
     }
 
-    @GetMapping(value = "todos")
-    public List<ApartamentosEntity> procura(){
+    @GetMapping(value = "/todos/{id}")
+    public ResponseEntity<Object> procura(@PathVariable(value = "id") Integer id) {
+        Optional<ApartamentosEntity> apartamentosEntity = apartamentosService.findById(id);
+        if (!apartamentosEntity.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Apartamento não cadastrado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(apartamentosEntity.get());
+    }
+
+    @GetMapping(value = "aaa")
+    public ResponseEntity<List<ApartamentosEntity>> listaw() {
         var todosApartamentos = apartamentosRepository.findAll();
-        return todosApartamentos;
+        return ResponseEntity.status(HttpStatus.OK).body(todosApartamentos);
     }
 
     @GetMapping(value = "all")
