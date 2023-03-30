@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/vagas", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/apartamentos", produces = MediaType.APPLICATION_JSON_VALUE)
 @ResponseBody
 public class ApartamentosController {
 

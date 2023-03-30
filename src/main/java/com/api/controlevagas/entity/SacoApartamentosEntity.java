@@ -9,17 +9,17 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "APARTAMENTOS")
-public class ApartamentosEntity {
+@Table(name = "SACO_APARTAMENTOS")
+public class SacoApartamentosEntity {
 
     @Id
     @Column(name = "NUMEROAPARTAMENTO", nullable = false, unique = true)
     private Integer numeroApartamento;
 
-    @Column(name = "QUANTIDADEVAGAS", nullable = false, length = 2)
+    @Column(name = "QUANTIDADEVAGAS", nullable = false)
     private Integer quantidadeVagas;
 
-    @Column(name = "ID_VAGA_DEPOSITO", nullable = false)
-    private Integer idVagaDeposito;
+    @Column(name = "ID_VAGA", nullable = false)
+    private Integer idVaga;
 
 }
