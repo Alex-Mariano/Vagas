@@ -43,14 +43,9 @@ public class ApartamentosController {
         return ResponseEntity.status(HttpStatus.OK).body(apartamentosEntity.get());
     }
 
-    @GetMapping(value = "aaa")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<ApartamentosEntity>> listaw() {
-        var todosApartamentos = apartamentosRepository.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(todosApartamentos);
-    }
-
-    @GetMapping(value = "all")
-    public ResponseEntity<List<ApartamentosEntity>> lista() {
-        return ResponseEntity.status(HttpStatus.OK).body((List<ApartamentosEntity>) apartamentosService.findAll());
+        var apartamentosEntity = apartamentosRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(apartamentosEntity);
     }
 }
