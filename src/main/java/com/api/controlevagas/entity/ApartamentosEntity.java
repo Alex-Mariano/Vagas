@@ -19,7 +19,7 @@ public class ApartamentosEntity {
     @Column(name = "QUANTIDADEVAGAS", nullable = false, length = 2)
     private Integer quantidadeVagas;
 
-    @Column(name = "ID_VAGA_DEPOSITO", nullable = false)
+    @Column(name = "ID_VAGA_DEPOSITO")
     private Integer idVagaDeposito;
 
 }

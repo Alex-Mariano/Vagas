@@ -11,6 +11,6 @@ public class VagasDto {
 
     private String andarVaga;
 
-    private boolean enfreteDepositos;
+    private boolean enfrenteDeposito;
 
 }

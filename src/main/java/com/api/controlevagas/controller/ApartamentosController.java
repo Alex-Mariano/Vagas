@@ -41,6 +41,7 @@ public class ApartamentosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Apartamento não cadastrado");
         }
         return ResponseEntity.status(HttpStatus.OK).body(apartamentosEntity.get());
+
     }
 
     @GetMapping(value = "/all")
@@ -48,4 +49,5 @@ public class ApartamentosController {
         var apartamentosEntity = apartamentosRepository.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(apartamentosEntity);
     }
+
 }

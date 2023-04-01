@@ -3,7 +3,6 @@ package com.api.controlevagas.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -25,7 +24,7 @@ public class VagasEntity implements Serializable {
     @Column(name = "ANDARVAGA", length = 4, nullable = false)
     private String andarVaga;
 
-    @Column(name = "ENFRETEDEPOSITO", nullable = false)
-    private boolean enfreteDepositos;
+    @Column(name = "ENFRENTEDEPOSITO", nullable = false)
+    private boolean enfrenteDeposito;
 
 }
