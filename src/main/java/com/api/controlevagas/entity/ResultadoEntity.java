@@ -28,10 +28,10 @@ public class ResultadoEntity {
     @Column(name = "ANDARVAGA1", length = 5)
     private String andarVaga1;
 
-    @Column(name = "NROVAGA2", length = 2)
+    @Column(name = "NROVAGA2", length = 5)
     private String nroVaga2;
 
-    @Column(name = "ANDARVAGA2", length = 4)
+    @Column(name = "ANDARVAGA2", length = 5)
     private String andarVaga2;
 
 }

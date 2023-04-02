@@ -19,12 +19,21 @@ public class SorteioController {
     @Autowired
     SorteioService sorteioVagas;
 
-    @ApiOperation(value = "Sorteio de Vagas")
-    @PostMapping
-    public ResponseEntity<Object> sorteioVaga() {
+    @ApiOperation(value = "Sorteio")
+    @PostMapping(value = "/apartamentos")
+    public ResponseEntity<Object> sorteioApartamento() {
 
-        sorteioVagas.execute();
+        sorteioVagas.sorteioApartamentos();
 
         return ResponseEntity.status(HttpStatus.OK).body("Sorteio Realizado");
     }
+    @ApiOperation(value = "Sorteio")
+    @PostMapping(value = "/vagas")
+    public ResponseEntity<Object> sorteioVaga() {
+
+        sorteioVagas.sorteioVagas();
+
+        return ResponseEntity.status(HttpStatus.OK).body("Sorteio Realizado");
+    }
+
 }

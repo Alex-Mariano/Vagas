@@ -18,6 +18,9 @@ import java.util.Optional;
 @Service
 public class SorteioService {
 
+    public static final String SIMPLES = "S";
+    public static final String DUPLA = "D";
+    public static final boolean FALSO = false;
     @Autowired
     ApartamentosRepository apartamentosRepository;
 
@@ -28,11 +31,23 @@ public class SorteioService {
     VagasRepository vagasRepository;
 
     @Transactional
-    public void execute() {
+    public void sorteioVagas() {
 
-//        resultadoRepository.deleteAll();
-//
-//        carregaPreResultado();
+        List<VagasEntity> vagasSimples = embaralhaVagasSimples();
+
+        List<VagasEntity> vagasDuplas = embaralhaVagasDuplas();
+
+        List<ResultadoEntity> resultadoEntities = resultadoRepository.findAll();
+
+        atualizaVagasSimplesEDuplas(vagasSimples, vagasDuplas, resultadoEntities);
+
+        resultadoRepository.saveAll(resultadoEntities);
+    }
+
+    @Transactional
+    public void sorteioApartamentos() {
+
+        carregaPreResultado();
 
         List<VagasEntity> vagas = vagasRepository.findAll();
 
@@ -41,6 +56,82 @@ public class SorteioService {
         atualizaVagasEnfrenteAoDeposito(vagas, resultadoEntities);
 
         resultadoRepository.saveAll(resultadoEntities);
+    }
+
+    private static void atualizaVagasSimplesEDuplas(List<VagasEntity> vagasSimples, List<VagasEntity> vagasDuplas, List<ResultadoEntity> resultadoEntities) {
+
+        resultadoEntities.forEach(det -> {
+
+            Integer quantidadeVagas = det.getQuantidadeVagas();
+            String nroVaga1 = det.getNroVaga1();
+
+            if (quantidadeVagas == 1) {
+
+                if (nroVaga1 == null) {
+
+                    det.setNroVaga1(vagasSimples.get(0).getNroVaga());
+                    det.setAndarVaga1(vagasSimples.get(0).getAndarVaga());
+
+                    vagasSimples.remove(0);
+
+//                    det.setNroVaga2("");
+//                    det.setAndarVaga2("");
+                }
+            }
+
+            if (quantidadeVagas == 2) {
+
+                if (nroVaga1 == null) {
+
+                    if (vagasDuplas.isEmpty()) {
+
+                        det.setNroVaga1(vagasSimples.get(0).getNroVaga());
+                        det.setAndarVaga1(vagasSimples.get(0).getAndarVaga());
+
+                        vagasSimples.remove(0);
+
+                        det.setNroVaga2(vagasSimples.get(0).getNroVaga());
+                        det.setAndarVaga2(vagasSimples.get(0).getAndarVaga());
+
+                        vagasSimples.remove(0);
+
+                    } else {
+
+                        det.setNroVaga1(vagasDuplas.get(0).getNroVaga());
+                        det.setAndarVaga1(vagasDuplas.get(0).getAndarVaga());
+
+                        vagasDuplas.remove(0);
+
+//                        det.setNroVaga2("");
+//                        det.setAndarVaga2("");
+                    }
+                } else {
+
+                    det.setNroVaga2(vagasSimples.get(0).getNroVaga());
+                    det.setAndarVaga2(vagasSimples.get(0).getAndarVaga());
+
+                    vagasSimples.remove(0);
+                }
+            }
+        });
+    }
+
+    private List<VagasEntity> embaralhaVagasDuplas() {
+
+        List<VagasEntity> vagasDuplas = vagasRepository.findByEnfrenteDepositoAndTipoVaga(FALSO, DUPLA);
+
+        Collections.shuffle(vagasDuplas);
+
+        return vagasDuplas;
+    }
+
+    private List<VagasEntity> embaralhaVagasSimples() {
+
+        List<VagasEntity> vagasSimples = vagasRepository.findByEnfrenteDepositoAndTipoVaga(FALSO, SIMPLES);
+
+        Collections.shuffle(vagasSimples);
+
+        return vagasSimples;
     }
 
     private static void atualizaVagasEnfrenteAoDeposito(List<VagasEntity> vagas, List<ResultadoEntity> resultadoEntities) {
@@ -56,17 +147,17 @@ public class SorteioService {
                                 .filter(f -> Objects.equals(f.getIdVaga(), idVaga))
                                 .findFirst();
 
-                        Integer quantidadeVagas = det.getQuantidadeVagas();
+//                        Integer quantidadeVagas = det.getQuantidadeVagas();
                         String nroVaga = dadosVaga.get().getNroVaga();
                         String andarVaga = dadosVaga.get().getAndarVaga();
 
                         det.setNroVaga1(nroVaga);
                         det.setAndarVaga1(andarVaga);
 
-                        if (quantidadeVagas == 1) {
-                            det.setNroVaga2("");
-                            det.setAndarVaga2("");
-                        }
+//                        if (quantidadeVagas == 1) {
+//                            det.setNroVaga2("");
+//                            det.setAndarVaga2("");
+//                        }
                     }
                 }
         );
