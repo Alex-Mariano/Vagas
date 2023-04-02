@@ -74,8 +74,6 @@ public class SorteioService {
 
                     vagasSimples.remove(0);
 
-//                    det.setNroVaga2("");
-//                    det.setAndarVaga2("");
                 }
             }
 
@@ -102,8 +100,6 @@ public class SorteioService {
 
                         vagasDuplas.remove(0);
 
-//                        det.setNroVaga2("");
-//                        det.setAndarVaga2("");
                     }
                 } else {
 
@@ -147,17 +143,12 @@ public class SorteioService {
                                 .filter(f -> Objects.equals(f.getIdVaga(), idVaga))
                                 .findFirst();
 
-//                        Integer quantidadeVagas = det.getQuantidadeVagas();
                         String nroVaga = dadosVaga.get().getNroVaga();
                         String andarVaga = dadosVaga.get().getAndarVaga();
 
                         det.setNroVaga1(nroVaga);
                         det.setAndarVaga1(andarVaga);
 
-//                        if (quantidadeVagas == 1) {
-//                            det.setNroVaga2("");
-//                            det.setAndarVaga2("");
-//                        }
                     }
                 }
         );
